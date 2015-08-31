@@ -3952,6 +3952,19 @@ row_drop_table_for_mysql(
 	}
 
 	/* If table is encrypted and table page encryption failed
+	mark this table read only. */
+	if (table->is_encrypted) {
+
+		if (table->can_be_evicted) {
+			dict_table_move_from_lru_to_non_lru(table);
+		}
+
+		dict_table_close(table, TRUE, FALSE);
+		err = DB_READ_ONLY;
+		goto funct_exit;
+	}
+
+	/* If table is encrypted and table page encryption failed
 	return error. */
 	if (table->is_encrypted) {
 
