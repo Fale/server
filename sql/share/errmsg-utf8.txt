@@ -7136,3 +7136,5 @@ ER_KILL_QUERY_DENIED_ERROR
         eng "You are not owner of query %lu"
         ger "Sie sind nicht Eigentümer von Abfrage %lu"
         rus "Вы не являетесь владельцем запроса %lu"
+ER_DECRYPTION_FAILED  42S02
+        eng "Table '%-.192s.%-.192s' encrypted but decryption failed."

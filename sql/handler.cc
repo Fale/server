@@ -371,6 +371,7 @@ int ha_init_errors(void)
   SETMSG(HA_ERR_TABLE_IN_FK_CHECK,	ER_DEFAULT(ER_TABLE_IN_FK_CHECK));
   SETMSG(HA_ERR_DISK_FULL,              ER_DEFAULT(ER_DISK_FULL));
   SETMSG(HA_ERR_FTS_TOO_MANY_WORDS_IN_PHRASE,  "Too many words in a FTS phrase or proximity search");
+  SETMSG(HA_ERR_DECRYPTION_FAILED,      ER_DEFAULT(ER_DECRYPTION_FAILED));
 
   /* Register the error messages for use with my_error(). */
   return my_error_register(get_handler_errmsgs, HA_ERR_FIRST, HA_ERR_LAST);
@@ -3516,6 +3517,10 @@ void handler::print_error(int error, myf errflag)
     break;
   case HA_ERR_NO_SUCH_TABLE:
     my_error(ER_NO_SUCH_TABLE_IN_ENGINE, errflag, table_share->db.str,
+             table_share->table_name.str);
+    DBUG_VOID_RETURN;
+  case HA_ERR_DECRYPTION_FAILED:
+    my_error(ER_DECRYPTION_FAILED, errflag, table_share->db.str,
              table_share->table_name.str);
     DBUG_VOID_RETURN;
   case HA_ERR_RBR_LOGGING_FAILED:
