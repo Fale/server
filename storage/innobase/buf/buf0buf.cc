@@ -4431,9 +4431,6 @@ buf_page_check_corrupt(
 				"Marking tablespace as missing. You may drop this table or"
 				" install correct key management plugin and key file.");
 		}
-		}
-
-	return corrupted;
 	}
 
 	return corrupted;

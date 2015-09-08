@@ -1,6 +1,7 @@
 /*****************************************************************************
 
 Copyright (c) 2000, 2015, Oracle and/or its affiliates. All Rights Reserved.
+Copyright (c) 2014, 2014, MariaDB Corporation.
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -1727,7 +1728,7 @@ row_update_for_mysql(
 			"However key management plugin or used key_id is not found or"
 			" used encryption algorithm or method does not match.",
 			prebuilt->table->name, prebuilt->table->space);
-		return (DB_TABLE_NOT_FOUND);
+		return (DB_DECRYPTION_FAILED);
 	}
 
 	if (UNIV_UNLIKELY(prebuilt->magic_n != ROW_PREBUILT_ALLOCATED)) {

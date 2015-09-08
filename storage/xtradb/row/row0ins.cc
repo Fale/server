@@ -2708,19 +2708,6 @@ row_ins_sec_index_entry_low(
 					  &cursor, 0, __FILE__, __LINE__, &mtr);
 
 	if (err != DB_SUCCESS) {
-		if (err == DB_ENCRYPTED_DECRYPT_FAILED) {
-			ib_push_warning(trx->mysql_thd,
-				DB_ENCRYPTED_DECRYPT_FAILED,
-				"Table %s is encrypted but encryption service or"
-				" used key_id is not available. "
-				" Can't continue reading table.",
-				index->table->name);
-			index->table->is_encrypted = true;
-		}
-		goto func_exit;
-	}
-
-	if (err != DB_SUCCESS) {
 		if (err == DB_DECRYPTION_FAILED) {
 			ib_push_warning(trx->mysql_thd,
 				DB_DECRYPTION_FAILED,
